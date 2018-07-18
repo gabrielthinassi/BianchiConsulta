@@ -27,7 +27,7 @@ object FrmPrincipal: TFrmPrincipal
     object lblPeriodoAnalise: TLabel
       Left = 16
       Top = 7
-      Width = 168
+      Width = 132
       Height = 19
       Caption = 'Per'#237'odo de An'#225'lise'
       Font.Charset = DEFAULT_CHARSET
@@ -68,32 +68,118 @@ object FrmPrincipal: TFrmPrincipal
       TabOrder = 2
     end
     object rdgTipoPesquisa: TJvRadioGroup
-      Left = 200
+      Left = 216
       Top = 7
       Width = 113
       Height = 135
-      Caption = 'Tipo de Pesquisa'
+      Caption = 'Exibi'#231#227'o'
       ItemIndex = 0
       Items.Strings = (
-        'Consultor'
-        'Cliente')
+        'Por Consultor'
+        'Por Cliente'
+        'Por Carga'
+        'Por Pedido')
       TabOrder = 3
     end
-    object edtConsultor: TJvEdit
-      Left = 319
-      Top = 40
-      Width = 66
-      Height = 21
+    object gbxFiltros: TGroupBox
+      Left = 359
+      Top = 7
+      Width = 282
+      Height = 135
+      Caption = 'Filtros'
       TabOrder = 4
-      Text = ''
+      object lblConsultor: TLabel
+        Left = 85
+        Top = 22
+        Width = 54
+        Height = 16
+        Caption = 'Consultor'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblCliente: TLabel
+        Left = 85
+        Top = 49
+        Width = 39
+        Height = 16
+        Caption = 'Cliente'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblCarga: TLabel
+        Left = 85
+        Top = 76
+        Width = 34
+        Height = 16
+        Caption = 'Carga'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lblUnidadeFabril: TLabel
+        Left = 85
+        Top = 103
+        Width = 82
+        Height = 16
+        Caption = 'Unidade Fabril'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object edtConsultor: TJvEdit
+        Left = 13
+        Top = 21
+        Width = 66
+        Height = 21
+        TabOrder = 0
+        Text = ''
+      end
+      object edtCliente: TJvEdit
+        Left = 13
+        Top = 48
+        Width = 66
+        Height = 21
+        TabOrder = 1
+        Text = ''
+      end
+      object edtCarga: TJvEdit
+        Left = 13
+        Top = 75
+        Width = 66
+        Height = 21
+        TabOrder = 2
+        Text = ''
+      end
+      object edtUnidadeFabril: TJvEdit
+        Left = 13
+        Top = 102
+        Width = 66
+        Height = 21
+        TabOrder = 3
+        Text = ''
+      end
     end
-    object edtCliente: TJvEdit
-      Left = 319
-      Top = 96
-      Width = 66
-      Height = 21
+    object btnBuscar: TJvBitBtn
+      Left = 664
+      Top = 35
+      Width = 97
+      Height = 77
+      Caption = '&Buscar'
       TabOrder = 5
-      Text = ''
     end
   end
   object pnlBaixo: TPanel
@@ -126,8 +212,8 @@ object FrmPrincipal: TFrmPrincipal
     TitleRowHeight = 17
   end
   object Menu: TMainMenu
-    Left = 704
-    Top = 8
+    Left = 608
+    Top = 168
     object mmFuncionalidades: TMenuItem
       Caption = '&Funcionalidades'
       object mmConfigurarConexao: TMenuItem
@@ -143,16 +229,16 @@ object FrmPrincipal: TFrmPrincipal
     end
   end
   object Conexao: TFDConnection
-    Left = 704
-    Top = 56
+    Left = 608
+    Top = 216
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    Left = 624
-    Top = 8
+    Left = 528
+    Top = 216
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 624
-    Top = 56
+    Left = 528
+    Top = 168
   end
 end

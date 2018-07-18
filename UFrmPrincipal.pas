@@ -11,7 +11,8 @@ uses
   FireDAC.Phys.IBBase, FireDAC.Phys.FB, Data.DB, FireDAC.Comp.Client, Vcl.Grids,
   Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.StdCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvBaseEdits, JvMaskEdit, JvCheckedMaskEdit, JvDatePickerEdit,
-  JvExStdCtrls, JvEdit, JvExExtCtrls, JvRadioGroup;
+  JvExStdCtrls, JvEdit, JvExExtCtrls, JvRadioGroup, Vcl.Buttons, JvExButtons,
+  JvBitBtn;
 
 type
   TFrmPrincipal = class(TForm)
@@ -31,8 +32,16 @@ type
     edtDataFinal: TJvDatePickerEdit;
     rdgEstadoPedidos: TJvRadioGroup;
     rdgTipoPesquisa: TJvRadioGroup;
+    gbxFiltros: TGroupBox;
     edtConsultor: TJvEdit;
+    lblConsultor: TLabel;
     edtCliente: TJvEdit;
+    lblCliente: TLabel;
+    edtCarga: TJvEdit;
+    lblCarga: TLabel;
+    edtUnidadeFabril: TJvEdit;
+    lblUnidadeFabril: TLabel;
+    btnBuscar: TJvBitBtn;
     procedure mmSairClick(Sender: TObject);
   private
     { Private declarations }
