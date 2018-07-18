@@ -82,7 +82,7 @@ object FrmPrincipal: TFrmPrincipal
     object edtConsultor: TJvEdit
       Left = 319
       Top = 40
-      Width = 121
+      Width = 66
       Height = 21
       TabOrder = 4
       Text = ''
@@ -90,7 +90,7 @@ object FrmPrincipal: TFrmPrincipal
     object edtCliente: TJvEdit
       Left = 319
       Top = 96
-      Width = 121
+      Width = 66
       Height = 21
       TabOrder = 5
       Text = ''
