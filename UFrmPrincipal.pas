@@ -4,15 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Vcl.ExtCtrls, FireDAC.Comp.UI,
-  FireDAC.Phys.IBBase, FireDAC.Phys.FB, Data.DB, FireDAC.Comp.Client, Vcl.Grids,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.Grids,
   Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.StdCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvBaseEdits, JvMaskEdit, JvCheckedMaskEdit, JvDatePickerEdit,
   JvExStdCtrls, JvEdit, JvExExtCtrls, JvRadioGroup, Vcl.Buttons, JvExButtons,
-  JvBitBtn;
+  JvBitBtn, UFrmConexao, Data.DB, Vcl.ExtCtrls, Data.SqlExpr, Data.DBXFirebird,
+  Datasnap.Provider, Datasnap.DBClient, Data.FMTBcd;
 
 type
   TFrmPrincipal = class(TForm)
@@ -21,9 +18,6 @@ type
     mmConfigurarConexao: TMenuItem;
     N1: TMenuItem;
     mmSair: TMenuItem;
-    Conexao: TFDConnection;
-    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
-    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     pnlTopo: TPanel;
     pnlBaixo: TPanel;
     gridPrincipal: TJvDBGrid;
@@ -42,7 +36,17 @@ type
     edtUnidadeFabril: TJvEdit;
     lblUnidadeFabril: TLabel;
     btnBuscar: TJvBitBtn;
+    Conexao: TSQLConnection;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    DSP: TDataSetProvider;
+    SQLDS: TSQLDataSet;
     procedure mmSairClick(Sender: TObject);
+    procedure mmConfigurarConexaoClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure gridPrincipalTitleClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -55,6 +59,36 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrmPrincipal.btnBuscarClick(Sender: TObject);
+begin
+  CDS.Open;
+end;
+
+procedure TFrmPrincipal.FormCreate(Sender: TObject);
+begin
+  Conexao.Params.Clear;
+  Conexao.LoginPrompt := False;
+  Conexao.DriverName := 'Firebird';
+  Conexao.Params.LoadFromFile(ExtractFilePath(Application.ExeName) + 'ServerConfig.ini');
+end;
+
+procedure TFrmPrincipal.FormDestroy(Sender: TObject);
+begin
+  CDS.Free;
+end;
+
+procedure TFrmPrincipal.gridPrincipalTitleClick(Column: TColumn);
+begin
+  CDS.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TFrmPrincipal.mmConfigurarConexaoClick(Sender: TObject);
+begin
+  frmConexao := TfrmConexao.Create(Self);
+  frmConexao.ShowModal;
+  frmConexao.FreeOnRelease;
+end;
 
 procedure TFrmPrincipal.mmSairClick(Sender: TObject);
 begin

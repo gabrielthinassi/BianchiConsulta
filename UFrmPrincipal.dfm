@@ -13,6 +13,8 @@ object FrmPrincipal: TFrmPrincipal
   Menu = Menu
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object pnlTopo: TPanel
@@ -180,6 +182,7 @@ object FrmPrincipal: TFrmPrincipal
       Height = 77
       Caption = '&Buscar'
       TabOrder = 5
+      OnClick = btnBuscarClick
     end
   end
   object pnlBaixo: TPanel
@@ -198,12 +201,15 @@ object FrmPrincipal: TFrmPrincipal
     Width = 784
     Height = 311
     Align = alClient
+    DataSource = DS
+    ReadOnly = True
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnTitleClick = gridPrincipalTitleClick
     SelectColumnsDialogStrings.Caption = 'Select columns'
     SelectColumnsDialogStrings.OK = '&OK'
     SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
@@ -218,6 +224,7 @@ object FrmPrincipal: TFrmPrincipal
       Caption = '&Funcionalidades'
       object mmConfigurarConexao: TMenuItem
         Caption = '&Configurar Conex'#227'o'
+        OnClick = mmConfigurarConexaoClick
       end
       object N1: TMenuItem
         Caption = '-'
@@ -228,17 +235,76 @@ object FrmPrincipal: TFrmPrincipal
       end
     end
   end
-  object Conexao: TFDConnection
-    Left = 608
-    Top = 216
+  object Conexao: TSQLConnection
+    DriverName = 'Firebird'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverUnit=Data.DBXFirebird'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver240.' +
+        'bpl'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
+        'eyToken=91d62ebb5b0d1b1b'
+      
+        'MetaDataPackageLoader=TDBXFirebirdMetaDataCommandFactory,DbxFire' +
+        'birdDriver240.bpl'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXFirebirdMetaDataCommandF' +
+        'actory,Borland.Data.DbxFirebirdDriver,Version=24.0.0.0,Culture=n' +
+        'eutral,PublicKeyToken=91d62ebb5b0d1b1b'
+      'GetDriverFunc=getSQLDriverINTERBASE'
+      'LibraryName=dbxfb.dll'
+      'LibraryNameOsx=libsqlfb.dylib'
+      'VendorLib=fbclient.dll'
+      'VendorLibWin64=fbclient.dll'
+      'VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird'
+      'Database=database.fdb'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Role=RoleName'
+      'MaxBlobSize=-1'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'SQLDialect=3'
+      'CommitRetain=False'
+      'WaitOnLocks=True'
+      'TrimChar=False'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'RoleName=RoleName'
+      'ServerCharSet='
+      'Trim Char=False')
+    Left = 688
+    Top = 169
   end
-  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    Left = 528
-    Top = 216
+  object DS: TDataSource
+    DataSet = CDS
+    Left = 712
+    Top = 392
   end
-  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
-    Provider = 'Forms'
-    Left = 528
-    Top = 168
+  object CDS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP'
+    Left = 640
+    Top = 392
+  end
+  object DSP: TDataSetProvider
+    DataSet = SQLDS
+    Left = 568
+    Top = 392
+  end
+  object SQLDS: TSQLDataSet
+    CommandText = 
+      'select'#13#10'    CIDADE.CODIGO_CIDADE as "C'#243'digo",'#13#10'    CIDADE.DESCRI' +
+      'CAO_CIDADE as "Descri'#231#227'o",'#13#10'    CIDADE.STATUS_CIDADE as "Status"' +
+      #13#10'from CIDADE'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Conexao
+    Left = 496
+    Top = 392
   end
 end

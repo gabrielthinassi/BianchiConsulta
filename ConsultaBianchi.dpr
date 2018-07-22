@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   UFrmPrincipal in 'UFrmPrincipal.pas' {FrmPrincipal},
   Vcl.Themes,
-  Vcl.Styles;
+  Vcl.Styles,
+  UFrmConexao in 'UFrmConexao.pas' {FrmConexao};
 
 {$R *.res}
 
