@@ -62,6 +62,19 @@ implementation
 
 procedure TFrmPrincipal.btnBuscarClick(Sender: TObject);
 begin
+  SQLDS.CommandText :=
+  'select                                                       ' + #13 +
+  '  DOCUMENTO_FATURA.CODIGO_DOCFAT as "Codigo",                ' + #13 +
+  '  DOCUMENTO_FATURA.EMPRESA_DOCFAT as "Empresa",              ' + #13 +
+  '  DOCUMENTO_FATURA.CLIENTE_DOCFAT as "Cliente",              ' + #13 +
+  '  DOCUMENTO_FATURA.DTEMISSAO_DOCFAT as "Emissão",            ' + #13 +
+  '  DOCUMENTO_FATURA.QTDETOTALITENS_DOCFAT as "Qtd. Itens",    ' + #13 +
+  '  DOCUMENTO_FATURA.VLRBRUTO_DOCFAT as "Vlr. Bruto",          ' + #13 +
+  '  DOCUMENTO_FATURA.VLRLIQUIDO_DOCFAT as "Vlr. Líquido"       ' + #13 +
+  'from DOCUMENTO_FATURA                                        ' + #13 +
+  'where DOCUMENTO_FATURA.DTEMISSAO_DOCFAT between ' + QuotedStr(StringReplace(edtDataInicial.Text, '/', '.', [rfReplaceAll]))
+                                           + ' and ' + QuotedStr(StringReplace(edtDataFinal.Text,   '/', '.', [rfReplaceAll]));
+
   CDS.Open;
 end;
 
